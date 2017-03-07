@@ -1,0 +1,1575 @@
+9.    Validating Date Format
+Obtain a date string in the format dd/mm/yyyy. Write code to validate the given date against the given format.
+ 
+Include a class UserMainCode with a static method validateDate which accepts a string .
+ 
+The return type of the validateDate method is 1 if the given date format matches the specified format , If the validation fails return the output as -1.
+ 
+Create a Main class which gets date string as an input and call the static method validateDate present in the UserMainCode.
+ 
+Input and Output Format:
+Input is a string .
+Refer sample output for formatting specifications
+ 
+Sample Input 1:
+12/06/1987
+Sample Output 1:
+Valid date format
+ 
+Sample Input 2:
+03/1/1987
+Sample Output 2:
+Invalid date format
+
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+
+public class validateDate 
+{
+
+	/**
+	 * @param args
+	 */
+	static void validate(String s1)
+	{
+		
+		if(s1.matches("[0-9]{2}(/)[0-9]{2}(/)[0-9]{4}"))
+		{
+			
+			SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+			sdf.setLenient(false);
+			
+			try
+			{
+				Date d1=sdf.parse(s1);
+				System.out.println("valid");
+			}
+			catch(Exception e)
+			{
+				System.out.println("invalid");
+			}
+			
+			
+		}
+		else
+		{
+			System.out.println("invalid");
+		}
+		
+		
+	}
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+
+		Scanner sc=new Scanner(System.in);
+		String s=sc.next();
+		validateDate.validate(s);
+	}
+
+}
+ 
+10.  Validate Time
+Obtain a time string as input in the following format 'hh:mm am' or 'hh:mm pm'. Write code to validate it using the following rules:
+ 
+- It should be a valid time in 12 hrs format
+- It should have case insensitive AM or PM
+ 
+Include a class UserMainCode with a static method validateTime which accepts a string.
+ 
+If the given time is as per the given rules then return 1 else return -1.If the value returned is 1 then print as valid time else print as Invalid time.
+ 
+Create a Main class which gets time(string value) as an input and call the static method validateTimepresent in the UserMainCode.
+ 
+Input and Output Format:
+Input is a string .
+Output is a string .
+
+ 
+Sample Input 1:
+09:59 pm
+Sample Output 1:
+Valid time
+ 
+Sample Input 2:
+10:70 AM
+Sample Output 2:
+Invalid time
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+
+public class ValidateTime
+{
+
+	/**
+	 * @param args
+	 */
+	static void validate(String str)
+	{
+		if(str.matches("[0-9]{2}:[0-9]{2}\\s(am|pm|AM|PM)"))
+		{
+		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+		sdf.setLenient(false);
+		try
+		{
+		Date d1=sdf.parse(str);	 
+		System.out.println("Valid time");
+		}
+		catch(Exception e){
+		System.out.println("Invalid time");
+		}
+		}
+		else
+		{
+			System.out.println("Invalid time");
+		}
+
+	}
+
+		
+		
+		
+		
+	
+	public static void main(String[] args)
+	{
+		// TODO Auto-generated method stub
+
+		Scanner sc=new Scanner(System.in);
+		String s=sc.nextLine();
+		ValidateTime.validate(s);
+		
+	}
+
+}
+
+
+
+30.Find the difference between Dates in months
+Given a method with two date strings in yyyy-mm-dd format as input. Write code to find the difference between two dates in months.
+ 
+Include a class UserMainCode with a static method getMonthDifference which accepts two date strings as input.
+ 
+The return type of the output is an integer which returns the diffenece between two dates in months.
+ 
+Create a class Main which would get the input and call the static method getMonthDifference present in the UserMainCode.
+ 
+Input and Output Format:
+Input consists of two date strings.
+Format of date : yyyy-mm-dd.
+ 
+Output is an integer.
+Refer sample output for formatting specifications.
+ 
+Sample Input 1:
+2012-03-01
+2012-04-16
+Sample Output 1:
+1
+
+ 
+Sample Input 2:
+2011-03-01
+2012-04-16
+Sample Output 2:
+13
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
+
+
+public class MonthDiff 
+{
+
+	/**
+	 * @param args
+	 */
+	static void validate(String s1,String s2)
+	{
+		int res=0;
+		if(s1.matches("[0-9]{4}(-)[0-9]{2}(-)[0-9]{2}"))
+		{
+			
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+			sdf.setLenient(false);
+			
+			try
+			{
+				Calendar c=Calendar.getInstance();
+				
+				Date d1=sdf.parse(s1);
+				c.setTime(d1);
+				int mon1=c.get(Calendar.MONTH);
+				int year1=c.get(Calendar.YEAR);
+				
+				Date d2=sdf.parse(s2);
+				c.setTime(d2);
+				int mon2=c.get(Calendar.MONTH);
+				int year2=c.get(Calendar.YEAR);
+				
+				if(year1>=year2)
+				{
+					res=Math.abs((year1-year2)*12+(mon1-mon2));
+					System.out.println(res);
+				}
+				else
+				{
+					res=Math.abs((year2-year1)*12+(mon2-mon1));
+					System.out.println(res);
+				}
+				
+			}
+			catch(Exception e)
+			{
+				System.out.println("-1");
+			}
+		}
+		else
+		{
+			System.out.println("-1");
+		}
+		
+	}
+	public static void main(String[] args)
+	{
+		// TODO Auto-generated method stub
+
+		Scanner sc=new Scanner(System.in);
+		String s=sc.nextLine();
+		String s1=sc.nextLine();
+		MonthDiff.validate(s,s1);
+	}
+
+}
+
+33.Difference between two dates in days
+Get two date strings as input and write code to find difference between two dates in days.
+ 
+Include a class UserMainCode with a static method getDateDifference which accepts two date strings as input.
+ 
+The return type of the output is an integer which returns the diffenece between two dates in days.
+ 
+Create a class Main which would get the input and call the static method getDateDifference present in the UserMainCode.
+ 
+Input and Output Format:
+Input consists of two date strings.
+Format of date : yyyy-mm-dd.
+ 
+Output is an integer.
+Refer sample output for formatting specifications.
+ 
+Sample Input 1:
+2012-03-12
+2012-03-14
+Sample Output 1:
+2
+
+Sample Input 2:
+2012-04-25
+2012-04-28
+Sample Output 2:
+3
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
+
+
+public class DateDiff 
+{
+
+	/**
+	 * @param args
+	 */
+	static void validate(String s1,String s2)
+	{
+		int res=0;
+		if(s1.matches("[0-9]{4}(-)[0-9]{2}(-)[0-9]{2}"))
+		{
+			
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+			sdf.setLenient(false);
+			
+			try
+			{
+				Calendar c=Calendar.getInstance();
+				
+				Date d1=sdf.parse(s1);
+				c.setTime(d1);
+				long t1=c.getTimeInMillis();
+				
+				Date d2=sdf.parse(s2);
+				c.setTime(d2);
+				long t2=c.getTimeInMillis();
+				
+				long t=t2-t1;
+				int result=(int) (t/(1000*24*60*60));
+				System.out.println(result);
+			}
+			catch(Exception e)
+			{
+				System.out.println("-1");
+			}
+		}
+		else
+		{
+			System.out.println("-1");
+		}
+		
+	}
+	public static void main(String[] args)
+	{
+		// TODO Auto-generated method stub
+
+		Scanner sc=new Scanner(System.in);
+		String s=sc.nextLine();
+		String s1=sc.nextLine();
+		DateDiff.validate(s,s1);
+	}
+
+}
+
+51.Finding the day of birth
+Given an input as date of birth of person, write a program to calculate on which day (MONDAY,TUESDAY....) he was born store and print the day in Upper Case letters.
+
+Include a class UserMainCode with a static method calculateBornDay which accepts a string as input.
+ 
+The return type of the output is a string which should be the day in which the person was born.
+ 
+Create a class Main which would get the input and call the static method calculateBornDay present in the UserMainCode.
+ 
+Input and Output Format:
+NOTE: date format should be(dd-MM-yyyy)
+Input consists a date string.
+Output is a string which the day in which the person was born.
+Refer sample output for formatting specifications.
+ 
+Sample Input 1:
+29-07-2013
+Sample Output 1:
+MONDAY
+
+Sample Input 2:
+14-12-1992
+Sample Output 2:
+MONDAY
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+
+public class DobDay 
+{
+
+	/**
+	 * @param args
+	 */
+	static void validate(String s1)
+	{
+		String s2;
+		if(s1.matches("[0-9]{2}(-)[0-9]{2}(-)[0-9]{4}"))
+		{
+			
+			SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+			SimpleDateFormat sdf1=new SimpleDateFormat("EEEE");
+			sdf.setLenient(false);
+			sdf1.setLenient(false);
+			
+			try
+			{
+				Date d1=sdf.parse(s1);
+				s2=sdf1.format(d1);
+				System.out.println(s2);
+			
+				
+				
+			}
+			catch(Exception e)
+			{
+				System.out.println("invalid");
+			}
+			
+			
+		}
+		else
+		{
+			System.out.println("invalid");
+		}
+	}
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+
+		Scanner sc=new Scanner(System.in);
+		String s=sc.nextLine();
+		DobDay.validate(s);
+	}
+
+}
+
+53.Experience Calculator
+Write a program to read Date of Joining and current date as Strings and Experience as integer and validate whether the given experience and calculated experience are the same. Print “true” if same, else “false”.
+
+ 
+Include a class UserMainCode with a static method calculateExperience which accepts 2 strings and an integer. The return type is boolean.
+Create a Class Main which would be used to accept 2 string (dates) and an integer and call the static method present in UserMainCode.
+Input and Output Format:
+Input consists of 2 strings and an integer, where the 2 strings corresponds to the date of joining and current date, and the integer is the experience.
+Output is either “true” or “false”.
+Refer sample output for formatting specifications.
+ 
+Sample Input 1:
+11/01/2010
+01/09/2014
+4
+Sample Output 1:
+true
+ 
+Sample Input 2:
+11/06/2009
+01/09/2014
+4
+Sample Output 2:
+False
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
+
+
+public class ExperienceCalculator 
+{
+
+	/**
+	 * @param args
+	 */
+	static boolean validate(String s1,String s2,int n)
+	{
+		boolean result=false;
+		if(s1.matches("[0-9]{2}(/)[0-9]{2}(/)[0-9]{4}"))
+		{
+			
+			SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+			sdf.setLenient(false);
+			
+			try
+			{
+				Calendar c=Calendar.getInstance();
+				
+				Date d1=sdf.parse(s1);
+				c.setTime(d1);
+				int jyear=c.get(Calendar.YEAR);
+				
+				Date d2=sdf.parse(s2);
+				c.setTime(d2);
+				int cyear=c.get(Calendar.YEAR);
+				
+				int diff=Math.abs(cyear-jyear);
+				
+				if(diff==n)
+				{
+					result=true;
+				}
+				
+				
+				
+			}
+			catch(Exception e)
+			{
+				result=false;
+			}
+			
+			
+		}
+		else
+		{
+			result=false;
+		}
+		
+		return result;
+	}
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+
+		Scanner sc=new Scanner(System.in);
+		String s=sc.nextLine();
+		String s1=sc.nextLine();
+		int n=sc.nextInt();
+		System.out.println(ExperienceCalculator.validate(s,s1,n));
+	}
+
+}
+
+60.Date Validation
+ 
+Write a program to read a string representing a date. The date can be in any of the three formats
+1:dd-MM-yyyy 2: dd/MM/yyyy 3: dd.MM.yyyy
+If the date is valid, print valid else print invalid.
+Include a class UserMainCode with a static method getValidDate which accepts a string. The return type (integer) should be based on the validity of the date.
+Create a Class Main which would be used to accept Input string and call the static method present in UserMainCode.
+Input and Output Format:
+Input consists of a string.
+Output consists of a string.
+Refer sample output for formatting specifications.
+Sample Input 1:
+03.12.2013
+Sample Output 1:
+valid
+ 
+Sample Input 2:
+03$12$2013
+Sample Output 3:
+Invalid
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+
+public class ValidateDate2 
+{
+
+	/**
+	 * @param args
+	 */
+	static void validate(String s1)
+	{
+		
+		if(s1.matches("[0-9]{2}(/)[0-9]{2}(/)[0-9]{4}") || s1.matches("[0-9]{2}(-)[0-9]{2}(-)[0-9]{4}")
+				|| s1.matches("[0-9]{2}(.)[0-9]{2}(.)[0-9]{4}"))
+		{
+			
+			SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat sdf1=new SimpleDateFormat("dd-MM-yyyy");
+			SimpleDateFormat sdf2=new SimpleDateFormat("dd.MM.yyyy");
+			sdf.setLenient(false);
+			sdf1.setLenient(false);
+			sdf2.setLenient(false);
+			
+			try
+			{
+				Date d1=sdf.parse(s1);
+				System.out.println("valid");
+			}
+			catch(Exception e)
+			{
+				try
+				{
+					Date d2=sdf1.parse(s1);
+					System.out.println("valid");
+				}
+				catch(Exception e1)
+				{
+					try
+					{
+						Date d3=sdf2.parse(s1);
+						System.out.println("valid");
+					}
+					catch(Exception e2)
+					{
+						System.out.println("invalid");
+					}
+					
+				}
+			}
+			
+			
+		}
+		else
+		{
+			System.out.println("invalid");
+		}
+		
+		
+	}
+	
+	public static void main(String[] args)
+	{
+		// TODO Auto-generated method stub
+
+		Scanner sc=new Scanner(System.in);
+		String s=sc.next();
+		ValidateDate2.validate(s);
+	}
+
+}
+
+63.Month Name
+ 
+Given a date as a string input in the format dd-mm-yy, write a program to extract the month and to print the month name in upper case.
+ 
+Include a class UserMainCode with a static method “getMonthName” that accepts a String argument and returns a String that corresponds to the month name.
+ 
+Create a class Main which would get the String as input and call the static method getMonthName present in the UserMainCode.
+ 
+The month names are {JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER}
+ 
+Input and Output Format:
+Input consists of a String.
+Output consists of a String.
+ 
+Sample Input:
+01-06-82
+ 
+Sample Output:
+JUNE
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+
+public class MonthName 
+{
+
+	/**
+	 * @param args
+	 */
+	static void validate(String s1)
+	{
+		String s;
+		if(s1.matches("[0-9]{2}(-)[0-9]{2}(-)[0-9]{4}"))
+		{
+			
+			SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+			SimpleDateFormat sdf1=new SimpleDateFormat("MMMM");
+			sdf.setLenient(false);
+			sdf1.setLenient(false);
+			
+			try
+			{
+				Date d1=sdf.parse(s1);
+				s=sdf1.format(d1);
+				System.out.println(s.toUpperCase());
+			}
+			catch(Exception e)
+			{
+				System.out.println("invalid");
+			}
+			
+			
+		}
+		else
+		{
+			System.out.println("invalid");
+		}
+		
+		
+	}
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+
+		Scanner sc=new Scanner(System.in);
+		String s=sc.nextLine();
+		MonthName.validate(s);
+	}
+
+}
+
+67.Month : Number of Days
+ 
+Given two inputs year and month (Month is coded as: Jan=0, Feb=1 ,Mar=2 ...), write a program to find out total number of days in the given month for the given year.
+ 
+Include a class UserMainCode with a static method “getNumberOfDays” that accepts 2 integers as arguments and returns an integer. The first argument corresponds to the year and the second argument corresponds to the month code. The method returns an integer corresponding to the number of days in the month.
+ 
+Create a class Main which would get 2 integers as input and call the static method getNumberOfDays present in the UserMainCode.
+ 
+Input and Output Format:
+Input consists of 2 integers that correspond to the year and month code.
+Output consists of an integer that correspond to the number of days in the month in the given year.
+ 
+Sample Input:
+2000
+1
+ Sample Output:
+29
+
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Scanner;
+
+
+public class NoOfDays 
+{
+
+	/**
+	 * @param args
+	 */
+	
+	static void calculate(int y,int m)
+	{
+		int result;
+		try
+		{
+			Calendar c=Calendar.getInstance();
+			
+			c.set(Calendar.YEAR,y);
+			c.set(Calendar.MONTH,m);
+			
+			GregorianCalendar g=new GregorianCalendar();
+			boolean b=g.isLeapYear(y);
+			
+			if(b || m!=1)
+			{
+				result=c.getActualMaximum(c.DAY_OF_MONTH);
+				System.out.println(result);
+			}
+			else
+			{
+				System.out.println("28");
+			}
+			
+			
+		}
+		catch(Exception e)
+		{
+			
+		}
+		
+	}
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+
+		Scanner sc=new Scanner(System.in);
+		int year=sc.nextInt();
+		int month=sc.nextInt();
+		NoOfDays.calculate(year,month);
+	}
+
+}
+
+13.Day of the Week
+ 
+Write a program to read a date as string (MM-dd-yyyy) and return the day of week on that date.
+Include a class UserMainCode with a static method getDay which accepts the string. The return type (string) should be the day of the week.
+Create a Class Main which would be used to accept Input string and call the static method present in UserMainCode.
+Input and Output Format:
+Input consists of a string.
+Output consists of a string.
+Refer sample output for formatting specifications.
+Sample Input 1:
+07-13-2012
+Sample Output 1:
+Friday
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+
+public class DayName 
+{
+
+	/**
+	 * @param args
+	 */
+	static void validate(String s)
+	{
+		String res;
+		if(s.matches("[0-9]{2}(-)[0-9]{2}(-)[0-9]{4}"))
+		{
+			
+			SimpleDateFormat sdf=new SimpleDateFormat("MM-dd-yyyy");
+			SimpleDateFormat sdf1=new SimpleDateFormat("EEEE");
+			sdf.setLenient(false);
+			sdf1.setLenient(false);
+			
+			try
+			{
+				Date d1=sdf.parse(s);
+				res=sdf1.format(d1);
+				System.out.println(res);
+			}
+			catch(Exception e)
+			{
+				System.out.println("invalid");
+			}
+			
+			
+		}
+		else
+		{
+			System.out.println("invalid");
+		}
+		
+	}
+	
+	
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+
+		Scanner sc=new Scanner(System.in);
+		String s=sc.nextLine();
+		DayName.validate(s);
+	}
+
+}
+ 
+
+21.Date Format Conversion
+ 
+Given a date string in the format dd/mm/yyyy, write a program to convert the given date to the format dd-mm-yy.
+ 
+Include a class UserMainCode with a static method “convertDateFormat” that accepts a String and returns a String.
+ 
+Create a class Main which would get a String as input and call the static method convertDateFormat present in the UserMainCode.
+ 
+Input and Output Format:
+Input consists of a String.
+Output consists of a String.
+ 
+Sample Input:
+12/11/1998
+ 
+Sample Output:
+12-11-98
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+
+public class DateFormatConversion
+{
+
+	/**
+	 * @param args
+	 */
+	static void validate(String s)
+	{
+		
+		String res;
+		if(s.matches("[0-9]{2}(/)[0-9]{2}(/)[0-9]{4}"))
+		{
+			
+			SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat sdf1=new SimpleDateFormat("dd-MM-yy");
+			sdf.setLenient(false);
+			sdf1.setLenient(false);
+			
+			try
+			{
+				Date d1=sdf.parse(s);
+				res=sdf1.format(d1);
+				System.out.println(res);
+			}
+			catch(Exception e)
+			{
+				System.out.println("invalid");
+			}
+			
+			
+		}
+		else
+		{
+			System.out.println("invalid");
+		}
+		
+	}
+	
+	
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+
+		Scanner sc=new Scanner(System.in);
+		String s=sc.nextLine();
+		DateFormatConversion.validate(s);
+	}
+
+}
+
+25.Next Year day
+ 
+Given a date string in dd/mm/yyyy format, write a program to calculate the day which falls on the same date next year. Print the output in small case.
+ 
+The days are sunday, monday, tuesday, wednesday, thursday, friday and saturday.
+ 
+Include a class UserMainCode with a static method “nextYearDay” that accepts a String and returns a String.
+ 
+Create a class Main which would get a String as input and call the static method nextYearDay present in the UserMainCode.
+ 
+Input and Output Format:
+Input consists of a String.
+Output consists of a String.
+ 
+Sample Input:
+13/07/2012
+ 
+Sample Output:
+saturday
+ 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
+
+
+public class NextYearDay
+{
+
+	/**
+	 * @param args
+	 */
+	static void validate(String s)
+	{
+		
+		String res;
+		if(s.matches("[0-9]{2}(/)[0-9]{2}(/)[0-9]{4}"))
+		{
+			
+			SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat sdf1=new SimpleDateFormat("EEEE");
+			sdf.setLenient(false);
+			sdf1.setLenient(false);
+			
+			try
+			{
+				Calendar c=Calendar.getInstance();
+				
+				Date d1=sdf.parse(s);
+				c.setTime(d1);
+				c.add(Calendar.YEAR, 1);
+				
+				Date d2=c.getTime();
+				res=sdf1.format(d2);
+				System.out.println(res);
+				
+				
+				
+			}
+			catch(Exception e)
+			{
+				System.out.println("invalid");
+			}
+			
+			
+		}
+		else
+		{
+			System.out.println("invalid");
+		}
+		
+	}
+	
+	
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+
+		Scanner sc=new Scanner(System.in);
+		String s=sc.nextLine();
+		NextYearDay.validate(s);
+	}
+
+}
+
+54.DOB - Validation
+
+Write a program to validate the Date of Birth given as input in String format (MM/dd/yyyy) as per the validation rules given below. Return true for valid dates else return false.
+1. Value should not be null
+2. month should be between 1-12, date should be between 1-31 and year should be a four digit number.
+Include a class UserMainCode with a static method ValidateDOB which accepts the string. The return type is TRUE / FALSE.
+Create a Class Main which would be used to accept the string and call the static method present in UserMainCode.
+
+Input and Output Format:
+Input consists of a string.
+Output consists of TRUE / FALSE.
+Refer sample output for formatting specifications.
+
+Sample Input 1:
+12/23/1985
+
+Sample Output 1:
+TRUE
+
+Sample Input 2:
+31/12/1985
+
+Sample Output 2:
+FALSE
+
+54. DOB – Validation
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+public class UserMainCode {
+
+public static String getvalues(String s1) 
+{
+if(str.matches("[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}"))
+{
+SimpleDateFormat sdf=new SimpleDateFormat("MM/dd/yyyy");
+sdf.setLenient(false);
+try {
+Date d1=sdf.parse(s1);
+return "valid";
+} catch (ParseException e) 
+{
+	return "Invalid";
+}
+}
+else
+return "Invalid";
+
+}
+
+public static void main(String[] args) 
+{
+
+Scanner in=new Scanner(System.in);
+String s1=in.next();
+System.out.println(UserMainCode.getvalues(s1));
+}
+}
+
+
+
+
+
+
+61.String Processing - ZigZag
+
+Write a program to read a string containing date in DD-MM-YYYY format. find the number of days in the given month.
+
+Note - In leap year February has got 29 days.
+
+Include a class UserMainCode with a static method getLastDayOfMonth which accepts the string. The return type is the integer having number of days.
+
+Create a Class Main which would be used to accept the string and call the static method present in UserMainCode.
+
+Input and Output Format:
+Input consists of a string.
+Output consists of integer.
+Refer sample output for formatting specifications.
+
+Sample Input 1:
+12-06-2012
+Sample Output 1:
+30
+
+Sample Input 2:
+10-02-2012
+Sample Output 2:
+29
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
+public class UserMainCode {
+public static int getvalues(String s1) 
+{
+if(s1.matches("[0-9]{2}[-]{1}[0-9]{2}[-]{1}[0-9]{4}"))
+{
+	SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+	sdf.setLenient(false);
+	try {
+	Date d1=sdf.parse(s1);
+	Calendar c=Calendar.getInstance();
+	c.setTime(d1);
+	int k=c.getActualMaximum(c.DAY_OF_MONTH);
+	return k;
+	} 
+	catch (ParseException e) 
+	{
+		return -1;
+	}
+}
+else
+return -1;
+}
+public static void main(String[] args) 
+{
+Scanner in=new Scanner(System.in);
+String s1=in.nextLine();
+System.out.println(UserMainCode.getvalues(s1));
+}
+}
+
+
+62.Leap Year
+
+Write a program to read a string containing date in DD/MM/YYYY format and check if its a leap year. If so, return true else return false.
+
+Include a class UserMainCode with a static method isLeapYear which accepts the string. The return type is the boolean indicating TRUE / FALSE.
+
+Create a Class Main which would be used to accept the string and call the static method present in UserMainCode.
+
+Input and Output Format:
+
+Input consists of a string.
+
+Output consists of TRUE / FALSE.
+
+Refer sample output for formatting specifications.
+
+Sample Input 1:
+
+23/02/2012
+
+Sample Output 1:
+
+TRUE
+
+Sample Input 2:
+
+12/12/2011
+
+Sample Output 2:
+
+FALSE
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Scanner;
+
+
+public class LeapYear 
+{
+
+	/**
+	 * @param args
+	 */
+	static boolean validate(String s)
+	{
+		boolean res=false;
+		if(s.matches("[0-9]{2}(/)[0-9]{2}(/)[0-9]{4}"))
+		{
+		
+			SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+			sdf.setLenient(false);
+			
+		
+			try
+			{
+				Calendar c=Calendar.getInstance();
+				GregorianCalendar g=new GregorianCalendar();
+				
+				Date d1=sdf.parse(s);
+				c.setTime(d1);
+				int year=c.get(Calendar.YEAR);
+				res=g.isLeapYear(year);
+				
+				
+			}
+			catch(Exception e)
+			{
+				res=false;
+			}
+		
+		
+		}
+		else
+		{
+			res=false;
+		}
+		return res;
+	
+	}
+
+	
+	public static void main(String[] args)
+	{
+		// TODO Auto-generated method stub
+
+		Scanner sc=new Scanner(System.in);
+		String s=sc.nextLine();
+		System.out.println(LeapYear.validate(s));
+	}
+
+}
+
+
+38.Day of Week
+
+Write a program to read a string  containing date in DD/MM/YYYY format and prints the day of the week that date falls on.
+Return the day in lowercase letter (Ex: monday)
+
+Include a class UserMainCode with a static method getDayOfWeek which accepts the string. The return type is the string.
+Create a Class Main which would be used to accept the string and call the static method present in UserMainCode.
+
+Input and Output Format:
+Input consists of a string.
+Output consists of a string.
+Refer sample output for formatting specifications.
+
+Sample Input 1:
+02/04/1985
+Sample Output 1:
+Tuesday
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+public class UserMainCode {
+public static String getvalues(String str) 
+{
+if(str.matches("[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}"))
+{
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	SimpleDateFormat sdf1 = new SimpleDateFormat("EEEE");
+    String s1;
+	sdf.setLenient(false);
+      sdf1.setLenient(false);
+	try
+	{
+	     Date d1=sdf.parse(str);
+	     s1=sdf1.format(d1);
+		}
+	catch(ParseException e)
+	{
+		return "Invalid";
+	
+    }
+	return s1;
+}
+else
+return "Invalid";
+}
+public static void main(String[] args) 
+{
+
+Scanner in=new Scanner(System.in);
+String s1=in.next();
+System.out.println(UserMainCode.getvalues(s1));
+}
+}
+
+
+39.Add Time
+
+Write a program to read  two String variables containing time intervals in hh:mm:ss format. Add the two time intervals and return a string in days:hours:minutes:seconds format where DD is number of days.
+Hint: Maximum value for hh:mm:ss is 23:59:59
+
+Include a class UserMainCode with a static method addTime which accepts the string values. The return type is the string.
+Create a Class Main which would be used to accept the two string values and call the static method present in UserMainCode.
+
+Input and Output Format:
+Input consists of two string.
+Output consists of a string.
+Refer sample output for formatting specifications.
+
+Sample Input 1:
+12:45:30
+13:50:45
+Sample Output 1:
+1:2:36:15
+
+Sample Input 2:
+23:59:59
+23:59:59
+Sample Output 2:
+1:23:59:58
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
+import java.util.TimeZone;
+public class UserMainCode {
+public static String getvalues(String s1,String s2) 
+{
+if(s1.matches("[0-9]{2}:[0-9]{2}:[0-9]{2}") && s1.matches("[0-9]{2}:[0-9]{2}:[0-9]{2}"))
+{
+	try
+	{
+	SimpleDateFormat sdf=new SimpleDateFormat("HH:mm:ss");
+    Date d=sdf.parse(s1);
+    Date d1=sdf.parse(s2);
+	Calendar c=Calendar.getInstance();
+	c.setTime(d);
+	int h=c.get(Calendar.HOUR_OF_DAY);
+	int min=c.get(Calendar.MINUTE);
+	int sec=c.get(Calendar.SECOND);
+	c.setTime(d1);
+	int h1=c.get(Calendar.HOUR_OF_DAY);
+	int min1=c.get(Calendar.MINUTE);
+	int sec1=c.get(Calendar.SECOND);
+	int sec2=(sec+sec1);
+	int min2=(min+min1);
+	int h2=(h+h1);
+	int day=0;
+if(sec2>60)
+{
+sec2=sec2-60;
+min2++;
+
+}
+if(min2>60)
+{
+min2=min2-60;
+h2++;
+}
+if(h2>=24)
+{
+h2=h2-24;
+day++;
+}
+String dd,hh,mm,ss,ans="";
+dd=String.valueOf(day);
+hh=String.valueOf(h2);
+mm=String.valueOf(min2);
+ss=String.valueOf(sec2);
+ans=dd+":"+hh+":"+mm+":"+ss;
+return ans;
+	}
+	catch(ParseException e)
+	{
+		return "invalid";
+	}
+}
+return "invalid";
+}
+public static void main(String[] args) 
+{
+
+Scanner in=new Scanner(System.in);
+String s1=in.next();
+String s2=in.next();
+System.out.println(UserMainCode.getvalues(s1,s2));
+}
+}
+
+
+41.Date Format
+
+Write a program to read  two String variables in DD-MM-YYYY.Compare the two dates and return the older date in 'MM/DD/YYYY' format.
+
+Include a class UserMainCode with a static method findOldDate which accepts the string values. The return type is the string.
+Create a Class Main which would be used to accept the two string values and call the static method present in UserMainCode.
+
+Input and Output Format:
+Input consists of two string.
+Output consists of a string.
+Refer sample output for formatting specifications.
+
+Sample Input 1:
+05-12-1987
+8-11-2010
+Sample Output 1:
+12/05/1987
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
+public class UserMainCode {
+public static String getvalues(String s1,String s2) 
+{
+if(s1.matches("[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}") && s1.matches("[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}"))
+{
+
+    SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+    SimpleDateFormat sdf1=new SimpleDateFormat("MM/dd/yyyy");
+    try
+    {
+    Date d1=sdf.parse(s1);
+    Date d2=sdf.parse(s2);
+    Calendar cal=Calendar.getInstance();
+    cal.setTime(d1);
+    long y=cal.getTimeInMillis();
+    cal.setTime(d2);
+    long y1=cal.getTimeInMillis();
+    String s3=sdf1.format(d1);
+    String s4=sdf1.format(d2);
+    if(y<y1)
+                  return  s3;
+    else
+                   return s4;
+    }
+    catch(ParseException e)
+    {
+    	return "invalid";
+    }
+}
+else
+return "invalid";
+
+
+}
+public static void main(String[] args) 
+{
+
+Scanner in=new Scanner(System.in);
+String s1=in.next();
+String s2=in.next();
+System.out.println(UserMainCode.getvalues(s1,s2));
+}
+}
+
+
+69.Age for Voting
+
+Given a date of birth (dd/MM/yyyy) of a person in string, compute his age as of 01/01/2015.
+
+If his age is greater than 18, then println eligible else println not-eligible.
+
+Include a class UserMainCode with a static method getAge which accepts the string value. The return type is the string.
+
+Create a Class Main which would be used to accept the two string values and call the static method present in UserMainCode.
+
+Input and Output Format:
+Input consists of two string.
+Output consists of a string.
+Refer sample output for formatting specifications.
+
+Sample Input 1:
+16/11/1991
+
+Sample Output 1:
+eligible
+
+
+
+
+14.Retirement
+ 
+Given an input as HashMap which contains key as the ID and dob as value of employees, write a program to find out employees eligible for retirement. A person is eligible for retirement if his age is greater than or equal to 60.
+ 
+Assume that the current date is 01/01/2014.
+ 
+Include a class UserMainCode with a static method “retirementEmployeeList” that accepts a HashMap<String,String> as input and returns a ArrayList<String>. In this method, add the Employee IDs of all the retirement eligible persons to list and return the sorted list.
+(Assume date is in dd/MM/yyyy format).
+ 
+Create a class Main which would get the HashMap as input and call the static method retirementEmployeeList present in the UserMainCode.
+ 
+Input and Output Format:
+The first line of the input consists of an integer n, that corresponds to the number of employees.
+The next 2 lines of the input consists of strings that correspond to the id and dob of employee 1.
+The next 2 lines of the input consists of strings that correspond to the id and dob of employee 2.
+and so on...
+Output consists of the list of employee ids eligible for retirement in sorted order.
+ 
+Sample Input :
+4
+C1010
+02/11/1987
+C2020
+15/02/1980
+C3030
+14/12/1952
+T4040
+20/02/1950
+ 
+Sample Output :
+[C3030, T4040]
+
+
+69.Age for Voting
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
+public class UserMainCode {
+public static String getvalues(String str,String str1) 
+{
+if(s1.matches("[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}"))
+{
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+       String s1;
+	sdf.setLenient(false);
+	try
+	{
+		 Calendar c=Calendar.getInstance();
+		 Date d1=sdf.parse(str);
+		 Date d2=sdf.parse(str1);
+		 c.setTime(d1);
+		 int y1=c.get(Calendar.YEAR);
+		 c.setTime(d2);
+		 int y2=c.get(Calendar.YEAR);
+		 int k=Math.abs(y2-y1);
+		 if(k>=18)
+		 {
+			 return "eligible";
+		 }
+		}
+	catch(ParseException e)
+	{
+		return "not eligible";
+	
+    }
+}
+	return "not eligible";
+}
+public static void main(String[] args) 
+{
+
+Scanner in=new Scanner(System.in);
+String s1=in.next();
+String s2="01/01/2015";
+System.out.println(UserMainCode.getvalues(s1,s2));
+}
+}
+
+
+
+COLLECTIONS AND DATE
+
+
+public class UserMainCode
+{
+    public static ArrayList<String>  retirementEmployeeList (HashMap<String,String> hm)
+    {
+    	
+    	ArrayList<String> l=new ArrayList<String>();
+    	
+    	
+    	
+    		for(Map.Entry<String,String> map:hm.entrySet())
+        	{
+        		String str1=map.getValue();
+        		String str2="01/01/2014";
+        		
+        		SimpleDateFormat f=new SimpleDateFormat("dd/MM/YYYY");
+        		try
+        		{
+        			Calendar c=Calendar.getInstance();
+        		
+        			c.setTime(f.parse(str1));
+        			int year1=c.get(Calendar.YEAR);
+        			
+        			c.setTime(f.parse(str2));
+        			int year2=c.get(Calendar.YEAR);
+        			
+        			int diff=year2-year1;
+        			if(diff>=60)
+        			{
+        				String ss2=map.getKey();
+        				l.add(ss2);
+        			}
+        		}
+        		catch(Exception e)
+        		{
+        			
+        		}
+    		
+    		
+    		
+    	}
+    		return l;
+
+    }
+}
+
+
+
